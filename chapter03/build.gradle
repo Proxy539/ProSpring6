@@ -1,0 +1,34 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation 'org.springframework:spring-context:7.0.8'
+    implementation 'org.springframework:spring-core:7.0.8'
+    implementation project(':chapter02')
+
+    testImplementation libs.junit.jupiter
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    implementation libs.guava
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    mainClass = project.hasProperty("main") ? project.getProperty("main") : "com.apress.prospring6.two.HelloWorld"
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
