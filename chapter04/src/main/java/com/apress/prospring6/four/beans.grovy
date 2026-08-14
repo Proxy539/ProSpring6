@@ -1,0 +1,5 @@
+import com.apress.psorping6.four.groovy.Singer
+
+beans {
+    singer(Singer, name: 'John Mayer', age: 42)
+}

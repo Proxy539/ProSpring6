@@ -29,7 +29,7 @@ public class StandardOutMessageRenderer implements MessageRenderer {
     }
 
     @Override
-    public MessageProvider setMessageProvider() {
+    public MessageProvider getMessageProvider() {
         return this.messageProvider;
     }
 
