@@ -20,10 +20,6 @@ public class GrammyGuitarist implements Singer {
         LOGGER.info("talk");
     }
 
-    @Override
-    public void rest() {
-        LOGGER.info("zzz");
-    }
 }
 
 

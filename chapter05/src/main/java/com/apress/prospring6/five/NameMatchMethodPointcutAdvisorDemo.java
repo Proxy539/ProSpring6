@@ -23,7 +23,6 @@ public class NameMatchMethodPointcutAdvisorDemo {
         GrammyGuitarist proxy = (GrammyGuitarist) pf.getProxy();
         proxy.sing();
         proxy.sing(new Guitar());
-        proxy.rest();
         proxy.talk();
     }
 }

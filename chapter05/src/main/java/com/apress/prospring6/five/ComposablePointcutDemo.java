@@ -52,7 +52,6 @@ public class ComposablePointcutDemo {
         proxy.sing();
         proxy.sing(new Guitar());
         proxy.talk();
-        proxy.rest();
     }
 
 }

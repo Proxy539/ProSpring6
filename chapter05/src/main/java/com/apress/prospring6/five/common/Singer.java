@@ -13,5 +13,4 @@ public interface Singer {
         logger.info("Singing in the key of {}", key);
     }
 
-    void rest();
 }

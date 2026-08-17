@@ -22,6 +22,5 @@ public class RegexpPointcutDemo {
         Guitarist proxy = (Guitarist) pf.getProxy();
         proxy.sing();
         proxy.sing2();
-        proxy.rest();
     }
 }

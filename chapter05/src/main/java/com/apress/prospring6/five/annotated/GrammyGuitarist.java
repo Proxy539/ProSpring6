@@ -1,13 +1,12 @@
 package com.apress.prospring6.five.annotated;
 
 import com.apress.prospring6.five.common.Guitar;
-import com.apress.prospring6.five.common.Singer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component("johnMayer")
-public class GrammyGuitarist implements Singer {
+public class GrammyGuitarist extends com.apress.prospring6.five.common.GrammyGuitarist {
 
     private static Logger LOGGER = LoggerFactory.getLogger(GrammyGuitarist.class);
 
@@ -22,10 +21,5 @@ public class GrammyGuitarist implements Singer {
 
     public void talk() {
         LOGGER.info("talk");
-    }
-
-    @Override
-    public void rest() {
-        LOGGER.info("zzz");
     }
 }

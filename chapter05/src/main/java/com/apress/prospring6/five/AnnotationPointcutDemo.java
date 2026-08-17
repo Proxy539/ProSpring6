@@ -20,6 +20,5 @@ public class AnnotationPointcutDemo {
 
         AnnotatedGuitarist proxy = (AnnotatedGuitarist) pf.getProxy();
         proxy.sing(new Guitar());
-        proxy.rest();
     }
 }

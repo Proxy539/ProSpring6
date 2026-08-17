@@ -16,8 +16,4 @@ public class Guitarist implements Singer {
         LOGGER.info("And wrap me in your arms");
     }
 
-    @Override
-    public void rest() {
-        LOGGER.info("zzz.....");
-    }
 }

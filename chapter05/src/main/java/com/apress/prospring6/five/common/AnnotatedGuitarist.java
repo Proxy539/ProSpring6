@@ -17,8 +17,4 @@ public class AnnotatedGuitarist implements Singer {
         LOGGER.info("play: " + guitar.play());
     }
 
-    @Override
-    public void rest() {
-
-    }
 }
