@@ -12,6 +12,8 @@ repositories {
 }
 
 dependencies {
+    implementation project(':chapter05')
+
     implementation 'org.springframework.boot:spring-boot-starter-aspectj'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

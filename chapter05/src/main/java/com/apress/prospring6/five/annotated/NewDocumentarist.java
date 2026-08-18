@@ -1,6 +1,7 @@
 package com.apress.prospring6.five.annotated;
 
 import com.apress.prospring6.five.common.Guitar;
+import com.apress.prospring6.five.common.Guitarist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -22,5 +23,9 @@ public class NewDocumentarist {
     @Qualifier("johnMayer")
     public void setGuitarist(GrammyGuitarist guitarist) {
         this.guitarist = guitarist;
+    }
+
+    public GrammyGuitarist getGuitarist() {
+        return guitarist;
     }
 }
