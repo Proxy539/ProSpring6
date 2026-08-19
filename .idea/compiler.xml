@@ -11,6 +11,9 @@
       <module name="pro-spring-6.chapter05-boot" options="-parameters" />
       <module name="pro-spring-6.chapter05-boot.main" options="-parameters" />
       <module name="pro-spring-6.chapter05-boot.test" options="-parameters" />
+      <module name="pro-spring-6.chapter06-boot" options="-parameters" />
+      <module name="pro-spring-6.chapter06-boot.main" options="-parameters" />
+      <module name="pro-spring-6.chapter06-boot.test" options="-parameters" />
     </option>
   </component>
 </project>

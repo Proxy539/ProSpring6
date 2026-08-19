@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: "jdbc:tc:mariadb:10.7.4-focal:///postgres"
+
+logging:
+  pattern:
+    console: " %-5level: %class{0} - %msg%n"
+  level:
+    root: INFO
+    org.springframework.boot: DEBUG
+    com.apress.prospring6.six: DEBUG
+    org.testcontainers: DEBUG

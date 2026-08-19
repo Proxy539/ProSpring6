@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/chapter05" />
             <option value="$PROJECT_DIR$/chapter05-boot" />
             <option value="$PROJECT_DIR$/chapter06" />
+            <option value="$PROJECT_DIR$/chapter06-boot" />
           </set>
         </option>
       </GradleProjectSettings>

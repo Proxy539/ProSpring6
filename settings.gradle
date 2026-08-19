@@ -18,3 +18,4 @@ include('chapter04-boot')
 include 'chapter05'
 include 'chapter05-boot'
 include 'chapter06'
+include 'chapter06-boot'
