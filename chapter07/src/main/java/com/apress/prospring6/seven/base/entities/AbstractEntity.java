@@ -16,12 +16,14 @@ public abstract class AbstractEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    protected Long id;
-    protected int version;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
+    protected Long id;
+    @Version
+    @Column(name = "VERSION")
+    protected int version;
+
     public Long getId() {
         return this.id;
     }
@@ -30,8 +32,7 @@ public abstract class AbstractEntity implements Serializable {
         this.id = id;
     }
 
-    @Version
-    @Column(name = "VERSION")
+
     public int getVersion() {
         return version;
     }

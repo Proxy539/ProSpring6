@@ -35,36 +35,41 @@ public class Singer extends AbstractEntity {
     @Serial
     private static final long serialVersionUID = 2L;
 
+    @Column(name = "FIRST_NAME")
     private String firstName;
+    @Column(name = "LAST_NAME")
     private String lastName;
+    @Column(name = "BIRTH_DATE")
     private LocalDate birthDate;
+    @OneToMany(mappedBy = "singer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Album> albums = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "SINGER_INSTRUMENT",
+            joinColumns = @JoinColumn(name = "SINGER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "INSTRUMENT_ID"))
     private Set<Instrument> instruments = new HashSet<>();
 
-    @Column(name = "FIRST_NAME")
+
     public String getFirstName() {
         return this.firstName;
     }
 
-    @Column(name = "LAST_NAME")
+
     public String getLastName() {
         return this.lastName;
     }
 
-    @Column(name = "BIRTH_DATE")
+
     public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    @OneToMany(mappedBy = "singer", cascade = CascadeType.ALL, orphanRemoval = true)
+
     public Set<Album> getAlbums() {
         return albums;
     }
 
-    @ManyToMany
-    @JoinTable(name = "SINGER_INSTRUMENT",
-    joinColumns = @JoinColumn(name = "SINGER_ID"),
-    inverseJoinColumns = @JoinColumn(name = "INSTRUMENT_ID"))
+
     public Set<Instrument> getInstruments() {
         return instruments;
     }

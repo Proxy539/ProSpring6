@@ -38,10 +38,13 @@ dependencies {
     testImplementation 'org.springframework:spring-test:7.0.8'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    testImplementation platform('org.testcontainers:testcontainers-bom:1.21.3')
+    testImplementation platform('org.testcontainers:testcontainers-bom:1.21.4')
     testImplementation 'org.testcontainers:testcontainers'
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:mariadb'
+
+    // embedded H2 database for HibernateTestConfig
+    testRuntimeOnly 'com.h2database:h2:2.3.232'
 }
 
 tasks.named('test') {
