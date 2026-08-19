@@ -1,0 +1,17 @@
+services:
+  mariadb:
+    image: mariadb:11.4
+    container_name: prospring6-mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: prospring
+      MARIADB_DATABASE: prospring
+      MARIADB_USER: prospring
+      MARIADB_PASSWORD: prospring
+    ports:
+      - "3306:3306"
+    volumes:
+      - prospring6-mariadb-data:/var/lib/mysql
+
+volumes:
+  prospring6-mariadb-data:
