@@ -1,0 +1,18 @@
+services:
+  mariadb:
+    image: mariadb:11.4
+    container_name: prospring7-mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: prospring
+      MARIADB_DATABASE: prospring
+      MARIADB_USER: prospring
+      MARIADB_PASSWORD: prospring
+    ports:
+      - "3307:3306"
+    volumes:
+      - prospring7-mariadb-data:/var/lib/mysql
+      - ./docker-build/scripts:/docker-entrypoint-initdb.d
+
+volumes:
+  prospring7-mariadb-data:
