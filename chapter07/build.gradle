@@ -29,6 +29,9 @@ dependencies {
     implementation 'org.springframework:spring-orm:7.0.8'
     implementation 'org.hibernate.orm:hibernate-core:7.4.0.Final'
 
+    // jOOQ
+    implementation 'org.jooq:jooq:3.21.6'
+
     // JDBC driver + connection pool for the Hibernate SessionFactory/EntityManagerFactory
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:3.5.1'
     implementation 'org.apache.commons:commons-dbcp2:2.13.0'
