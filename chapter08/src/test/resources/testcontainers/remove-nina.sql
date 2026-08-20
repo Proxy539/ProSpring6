@@ -1,0 +1,3 @@
+delete from ALBUM where SINGER_ID = 5;
+delete from SINGER_INSTRUMENT where SINGER_ID = 5;
+delete from SINGER where ID = 5;

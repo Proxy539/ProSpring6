@@ -8,6 +8,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/chapter06/pro-spring-6.chapter06.test.iml" filepath="$PROJECT_DIR$/.idea/modules/chapter06/pro-spring-6.chapter06.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/chapter07/pro-spring-6.chapter07.main.iml" filepath="$PROJECT_DIR$/.idea/modules/chapter07/pro-spring-6.chapter07.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/chapter07/pro-spring-6.chapter07.test.iml" filepath="$PROJECT_DIR$/.idea/modules/chapter07/pro-spring-6.chapter07.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chapter08/pro-spring-6.chapter08.main.iml" filepath="$PROJECT_DIR$/.idea/modules/chapter08/pro-spring-6.chapter08.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chapter08/pro-spring-6.chapter08.test.iml" filepath="$PROJECT_DIR$/.idea/modules/chapter08/pro-spring-6.chapter08.test.iml" />
     </modules>
   </component>
 </project>
