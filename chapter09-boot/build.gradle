@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '4.1.0'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.apress.prospring6'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // reuse the entities/repos/services/exceptions already written (and tested) in
+    // the plain chapter09 module, instead of re-implementing them here
+    implementation project(':chapter09')
+
+    // the starters used across the other -boot modules so far
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    // AllService/SingerRepo/AlbumRepo (from chapter09) are JPA-based, so auto-configure
+    // DataSource + EntityManagerFactory + JpaTransactionManager (data-jpa is a superset
+    // of the jdbc starter above, kept for the explicit connectivity smoke test in main())
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation platform('org.testcontainers:testcontainers-bom:1.21.4')
+    testImplementation 'org.testcontainers:testcontainers'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:mariadb'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

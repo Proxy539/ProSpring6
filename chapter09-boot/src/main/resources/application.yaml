@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    driverClassName: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3307/prospring?useSSL=false
+    username: prospring
+    password: prospring
+    hikari:
+      maximum-pool-size: 25
+  jpa:
+    generate-ddl: false
+    hibernate:
+      # keep table/column names exactly as given in @Table/@Column (e.g. SINGER, not
+      # singer) - Boot's default strategy lowercases them, which doesn't match the
+      # uppercase schema in the SQL fixtures, and MariaDB on Linux is case-sensitive
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 10
+          fetch_size: 30
+        max_fetch_depth: 3
+        show-sql: true
+        format-sql: false
+        use_sql_comments: false
+        hbm2ddl:
+          auto: none
+
+logging:
+  pattern:
+    console: "%-5level: %class{0} - %msg%n"
+  level:
+    root: INFO
+    org.springframework.boot: INFO
+    com.apress.prospring6.nine: INFO
