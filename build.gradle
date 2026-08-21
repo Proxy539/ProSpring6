@@ -1,0 +1,127 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2" }
+        maven { url "https://repo.spring.io/release" }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/libs-snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://repo.spring.io/libs-milestone-local" }
+    }
+
+    dependencies {
+        // NOTE: io.spring.dependency-management and org.springframework.boot are
+        // intentionally NOT on the root buildscript classpath. The root project's
+        // buildscript classpath is inherited by every subproject, so putting them here
+        // would conflict with modules that apply them via a versioned
+        // `plugins { id '...' version ... }` block ("plugin already on the classpath
+        // with an unknown version"). Modules that need either declare it themselves.
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.42.0' // https://github.com/ben-manes/gradle-versions-plugin/
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.22'  // kotlin version
+        classpath 'org.jetbrains.kotlin:kotlin-allopen:1.8.22'
+        classpath 'org.jetbrains.kotlin:kotlin-noarg:1.8.22'
+        classpath 'org.graalvm.buildtools.native:org.graalvm.buildtools.native.gradle.plugin:0.9.22'
+    }
+}
+
+
+ext {
+    lang3Version = "3.18.0"
+    mockitoVersion = "2.0.2-beta"
+    testcontainersVersion = "1.18.3"
+    jakartaAnnotationVersion = "2.1.0"
+    jakartaInjectApiVersion = "2.0.1"
+    groovyVersion = "3.0.11"
+    dbcp2Version = "2.9.0"
+    mariadbClientVersion = "3.1.4"
+    hikariVersion = "5.0.1"
+    hibernateVersion = "6.2.6.Final"
+    hibernateValidatorVersion = "8.0.1.Final"
+    mongoVersion ="4.9.1"
+    h2Version = "2.1.214"
+    jooqVersion = "3.18.5"
+    aspectjVersion = "1.9.9.1"
+    logbackVersion = "1.4.8"
+    slf4jVersion = "2.0.7"
+    lombokVersion = "1.18.28"
+    jacksonVersion = "2.15.2"
+
+    thymeleafVersion = "3.1.1.RELEASE"
+    servletApiVersion="6.0.0"
+    restAssuredVersion="5.3.0"
+}
+
+defaultTasks 'clean', 'build'
+
+
+configure(allprojects) { project ->
+    apply plugin: 'java'
+    apply plugin: 'com.github.ben-manes.versions'
+
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2" }
+        maven { url "https://repo.spring.io/release" }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/libs-snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://repo.spring.io/libs-milestone" }
+    }
+
+    version '6.0-SNAPSHOT'
+
+    def commonCompilerArgs =
+            ["-Xlint:serial", "-Xlint:cast", "-Xlint:classfile", "-Xlint:dep-ann",
+             "-Xlint:divzero", "-Xlint:empty", "-Xlint:finally", "-Xlint:overrides",
+             "-Xlint:path", "-Xlint:processing", "-Xlint:static", "-Xlint:try", "-Xlint:-options"]
+
+    compileJava.options*.compilerArgs = commonCompilerArgs +
+            ["-Xlint:varargs", "-Xlint:fallthrough", "-Xlint:rawtypes",
+             "-Xlint:deprecation", "-Xlint:unchecked"/*, "-Werror"*/]
+
+    compileTestJava.options*.compilerArgs = commonCompilerArgs +
+            ["-Xlint:-varargs", "-Xlint:-fallthrough", "-Xlint:-rawtypes",
+             "-Xlint:-deprecation", "-Xlint:-unchecked"]
+
+    compileJava {
+        sourceCompatibility = JavaVersion.VERSION_19
+        targetCompatibility = JavaVersion.VERSION_19
+        options.encoding = "UTF-8"
+    }
+
+    compileTestJava {
+        sourceCompatibility = JavaVersion.VERSION_19
+        targetCompatibility = JavaVersion.VERSION_19
+        options.encoding = "UTF-8"
+        options.compilerArgs += "-parameters"
+    }
+
+    dependencies {
+        implementation "org.apache.commons:commons-lang3:$lang3Version"
+        implementation "org.junit.jupiter:junit-jupiter:5.9.3"
+
+        // JSR-305 only used for non-required meta-annotations
+        compileOnly "com.google.code.findbugs:jsr305:3.0.2"
+        testImplementation('com.google.code.findbugs:jsr305:3.0.2') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+        jvmArgs = ["--add-opens", "java.base/java.lang=ALL-UNNAMED"]
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+}
+
+// to generate the gradlew config just run `gradle.war`
+// the gradle archive is downloaded when first running ./gradle war
+tasks.withType(Wrapper).configureEach {
+    gradleVersion = '8.3-20230504222113+0000' //version required
+}
