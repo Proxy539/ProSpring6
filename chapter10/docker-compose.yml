@@ -1,0 +1,18 @@
+services:
+  mariadb:
+    image: mariadb:11.4
+    container_name: prospring6-ch10-mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: mainpass
+      MARIADB_DATABASE: musicdb
+      MARIADB_USER: prospring6
+      MARIADB_PASSWORD: prospring6
+    ports:
+      - "3310:3306"
+    volumes:
+      - prospring6-ch10-mariadb-data:/var/lib/mysql
+      - ./docker-build/scripts:/docker-entrypoint-initdb.d
+
+volumes:
+  prospring6-ch10-mariadb-data:
