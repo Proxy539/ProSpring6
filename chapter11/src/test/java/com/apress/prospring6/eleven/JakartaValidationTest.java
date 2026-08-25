@@ -1,6 +1,7 @@
 package com.apress.prospring6.eleven;
 
 import com.apress.prospring6.eleven.domain.Singer;
+import com.apress.prospring6.eleven.domain.SingerTwo;
 import com.apress.prospring6.eleven.validator.JakartaValidationCfg;
 import com.apress.prospring6.eleven.validator.SingerValidationService;
 import jakarta.validation.ConstraintViolation;
