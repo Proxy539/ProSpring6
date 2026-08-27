@@ -1,0 +1,57 @@
+plugins {
+    id 'war'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+description 'Chapter 14: Spring MVC Thymeleaf'
+
+// we are using Spring Boot dependency management, but we configure Spring MVC in the classic manner - explicitly, with no Spring Boot "magic"
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.boot:spring-boot-dependencies:4.1.0'
+    }
+}
+
+dependencies {
+    implementation 'org.springframework:spring-webmvc'
+    implementation 'org.springframework.data:spring-data-jpa'
+
+    implementation "org.thymeleaf:thymeleaf-spring6:$thymeleafVersion"
+    implementation "org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE"
+
+    implementation "org.hibernate.orm:hibernate-core:$hibernateVersion"
+    implementation "org.glassfish:jakarta.el:5.0.0-M1"
+    implementation "org.hibernate.validator:hibernate-validator:$hibernateValidatorVersion"
+
+    implementation "ch.qos.logback:logback-classic:$logbackVersion"
+    implementation "jakarta.annotation:jakarta.annotation-api:$jakartaAnnotationVersion"
+
+    implementation "com.zaxxer:HikariCP:$hikariVersion"
+    runtimeOnly "org.mariadb.jdbc:mariadb-java-client:$mariadbClientVersion"
+
+    compileOnly "jakarta.servlet:jakarta.servlet-api:$servletApiVersion"
+
+    implementation "commons-io:commons-io:2.11.0"
+
+    testImplementation 'org.springframework:spring-test'
+    testImplementation "jakarta.servlet:jakarta.servlet-api:$servletApiVersion"
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation "org.testcontainers:mariadb:$testcontainersVersion"
+    testImplementation "org.testcontainers:junit-jupiter:$testcontainersVersion"
+}
+
+// Scaffolded only, like chapter06 before it - no src/ yet. Fill in the Spring MVC +
+// Thymeleaf demo classes (config, controllers, templates) as this chapter's examples
+// are added. Start MariaDB first: build/run the image in docker-build/ (see its
+// Dockerfile) and point the app's DataSource at localhost:3306/musicdb.
+tasks.register('fatWar', War) {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    /*  Gradle Fat jars with multiple dependencies are affected by the same bug: https://issues.apache.org/jira/browse/MASSEMBLY-360 this statement fixes it */
+    manifest {
+        attributes "Created-By": "Iuliana Cosmina",
+                "Specification-Title": "Pro Spring 6 - Chapter 14"
+    }
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with war
+}
