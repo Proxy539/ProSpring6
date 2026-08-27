@@ -1,0 +1,61 @@
+# Spring boot application name
+spring:
+  application:
+    name: chapter13-sender-app
+  artemis:
+    mode: embedded
+    embedded:
+      queues: prospring6
+      enabled: true
+    user: prospring6
+    password: prospring6
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: letters-group-id
+
+  # datasource config
+  datasource:
+    url: "jdbc:h2:mem:testdb"
+    driverClassName: "org.h2.Driver"
+    username: sa
+    password: password
+
+  # jpa config
+  jpa:
+    database-platform: "org.hibernate.dialect.H2Dialect"
+    hibernate:
+      ddl-auto: create-drop
+    # Uppercase Table Name
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  # enabling the H2 web console
+  h2:
+    console:
+      enabled: true
+
+# application config
+app:
+  sending:
+    topic:
+      name: default # topic where letters are sent
+  receiving:
+    topic:
+      name: self # topic where letters are received
+
+# server config
+server:
+  port: 8090
+  compression:
+    enabled: true
+  address: 0.0.0.0
+
+# Logging config
+logging:
+  pattern:
+    console: "%-5level: %class{0} - %msg%n"
+  level:
+    root: INFO
+    org.springframework: DEBUG
+    com.apress.prospring6.thirteen: INFO

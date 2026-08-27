@@ -1,0 +1,70 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '4.1.0'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+description 'Chapter 13: Spring Data REST'
+
+// unlike chapter09/chapter12, this module IS a full Spring Boot application
+// (SenderApplication is @SpringBootApplication) - the Boot Gradle plugin gives
+// us bootRun/bootJar for it.
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.boot:spring-boot-dependencies:4.1.0'
+    }
+}
+
+dependencies {
+    // no explicit versions here - let the spring-boot-dependencies BOM (4.1.0) pick
+    // versions that are actually compatible with Spring Framework 7 / Jakarta EE 10
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-artemis'
+    implementation 'org.springframework:spring-jms'
+    implementation 'org.apache.artemis:artemis-jakarta-server'
+    // spring-boot-starter-kafka (not the bare spring-kafka artifact) - Boot 4.x split its
+    // autoconfiguration into per-feature modules, and KafkaProperties/kafka autoconfiguration
+    // now live in the separate spring-boot-kafka artifact this starter pulls in
+    implementation 'org.springframework.boot:spring-boot-starter-kafka'
+    // no explicit version - the root build.gradle's $logbackVersion (1.4.8) predates
+    // Spring Boot 4.1.0's own logback-core (1.5.34), and mixing logback-classic 1.4.8
+    // with logback-core 1.5.34 throws NoSuchMethodError at startup; let the BOM pick
+    // a matching pair instead
+    implementation 'ch.qos.logback:logback-classic'
+    implementation "jakarta.annotation:jakarta.annotation-api:$jakartaAnnotationVersion"
+    implementation "org.apache.commons:commons-lang3:$lang3Version"
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.springframework:spring-test'
+
+    // the app itself runs against an in-memory H2 database (see application.yaml),
+    // not just tests, so this needs to be on the main runtime classpath
+    runtimeOnly "com.h2database:h2:$h2Version"
+    runtimeOnly "org.mariadb.jdbc:mariadb-java-client:$mariadbClientVersion"
+}
+
+// This module tends to grow more than one @SpringBootApplication demo class as chapters'
+// worth of examples pile up (JMS/Artemis, Kafka, ...), so Boot can't always auto-detect a
+// single main class. Default to the current demo; override with -Pmain=<fqcn>, e.g.
+// ./gradlew :chapter13:bootRun -Pmain=com.apress.prospring6.thirteen.SomeOtherDemoApplication
+springBoot {
+    mainClass = project.hasProperty("main") ? project.getProperty("main") : "com.apress.prospring6.thirteen.KafkaApplication"
+}
+
+// JavaExec (which bootRun extends) does not forward the Gradle process's stdin to the
+// forked JVM by default - the forked app sees an already-closed input stream. Harmless for
+// demos that don't read stdin, but kept here since past demos in this module (e.g. the JMS
+// ArtemisApplication) blocked on System.in.read() to stay alive long enough for messages to
+// be delivered and received - without this the app would tear down before that could happen.
+tasks.named('bootRun') {
+    standardInput = System.in
+}

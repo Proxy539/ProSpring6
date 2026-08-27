@@ -13,6 +13,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/chapter09-boot/pro-spring-6.chapter09-boot.test.iml" filepath="$PROJECT_DIR$/.idea/modules/chapter09-boot/pro-spring-6.chapter09-boot.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/chapter09/pro-spring-6.chapter09.main.iml" filepath="$PROJECT_DIR$/.idea/modules/chapter09/pro-spring-6.chapter09.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/chapter09/pro-spring-6.chapter09.test.iml" filepath="$PROJECT_DIR$/.idea/modules/chapter09/pro-spring-6.chapter09.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chapter13/pro-spring-6.chapter13.main.iml" filepath="$PROJECT_DIR$/.idea/modules/chapter13/pro-spring-6.chapter13.main.iml" />
     </modules>
   </component>
 </project>

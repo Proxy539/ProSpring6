@@ -1,6 +1,9 @@
 # Ignore Gradle project-specific cache directory
 .gradle
 
+# Ignore custom Gradle user home (holds live daemon lock files - never committable)
+.gradle-user-home
+
 # Ignore Gradle build output directory
 build
 
