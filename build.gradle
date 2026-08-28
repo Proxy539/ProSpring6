@@ -18,9 +18,9 @@ buildscript {
         // `plugins { id '...' version ... }` block ("plugin already on the classpath
         // with an unknown version"). Modules that need either declare it themselves.
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.42.0' // https://github.com/ben-manes/gradle-versions-plugin/
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.22'  // kotlin version
-        classpath 'org.jetbrains.kotlin:kotlin-allopen:1.8.22'
-        classpath 'org.jetbrains.kotlin:kotlin-noarg:1.8.22'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.20'  // kotlin version
+        classpath 'org.jetbrains.kotlin:kotlin-allopen:2.1.20'
+        classpath 'org.jetbrains.kotlin:kotlin-noarg:2.1.20'
         classpath 'org.graalvm.buildtools.native:org.graalvm.buildtools.native.gradle.plugin:1.1.11'
     }
 }

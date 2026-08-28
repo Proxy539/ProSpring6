@@ -1,0 +1,33 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /
+  compression:
+    enabled: true
+  address: 0.0.0.0
+
+spring:
+  graphql:
+    graphiql:
+      enabled: true
+      path: graphiql
+  datasource:
+    driverClassName: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3307/musicdb?useSSL=false
+    username: prospring6
+    password: prospring6
+    hikari:
+      maximum-pool-size: 25
+  jpa:
+    generate-ddl: false
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 10
+          fetch_size: 30
+        max_fetch_depth: 3
+        hbm2ddl:
+          auto: none

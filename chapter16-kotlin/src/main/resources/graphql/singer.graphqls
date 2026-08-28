@@ -1,0 +1,41 @@
+type Singer {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    pseudonym: String
+    genre: String
+    birthDate: String
+    awards: [Award]
+    instruments: [Instrument]
+}
+
+type Award {
+    id: ID!
+    year: Int
+    category: String
+    itemName: String
+    awardName: String
+}
+
+type Instrument {
+    name: ID!
+}
+
+type Query {
+    singers: [Singer]
+    singerById(id: ID!) : Singer
+}
+
+type Mutation {
+    newSinger(singer: SingerInput): Singer!
+    updateSinger(id: ID!, singer: SingerInput): Singer!
+    deleteSinger(id: ID!): ID!
+}
+
+input SingerInput {
+    firstName: String!
+    lastName: String!
+    pseudonym: String
+    genre: String
+    birthDate: String
+}
