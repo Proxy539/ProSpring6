@@ -1,0 +1,53 @@
+plugins {
+    id 'war'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+description 'Chapter 15: Building RESTful Web Services'
+
+// we are using Spring Boot dependency management, but we configure Spring MVC in the classic manner - explicitly, with no Spring Boot "magic"
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.boot:spring-boot-dependencies:4.1.0'
+    }
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // no explicit version - the root build.gradle's $logbackVersion (1.4.8) predates
+    // Spring Boot 4.1's BOM-managed logback (1.5.34) and would override it, breaking
+    // Boot's logging bootstrap (see chapter13's build.gradle for the same note).
+    implementation "ch.qos.logback:logback-classic"
+    implementation "jakarta.annotation:jakarta.annotation-api:$jakartaAnnotationVersion"
+
+    implementation "com.zaxxer:HikariCP:$hikariVersion"
+    runtimeOnly "org.mariadb.jdbc:mariadb-java-client:$mariadbClientVersion"
+
+    compileOnly "jakarta.servlet:jakarta.servlet-api:$servletApiVersion"
+
+    testImplementation 'org.springframework:spring-test'
+    testImplementation "jakarta.servlet:jakarta.servlet-api:$servletApiVersion"
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // Spring Boot 4.1 split TestRestTemplate/@AutoConfigureTestRestTemplate out of
+    // spring-boot-starter-test into dedicated modules - see chapter14's build.gradle for the same note.
+    testImplementation 'org.springframework.boot:spring-boot-resttestclient'
+    // TestRestTemplateTestAutoConfiguration's bean-type deduction needs RestTemplateBuilder on the
+    // classpath even though nothing here calls it directly.
+    testImplementation 'org.springframework.boot:spring-boot-restclient'
+    // needed to actually start an embedded server for @SpringBootTest(webEnvironment = RANDOM_PORT) -
+    // excluded from the main dependencies above since production deploys as a WAR to an external Tomcat.
+    testRuntimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
+    testRuntimeOnly 'com.h2database:h2'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

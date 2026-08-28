@@ -31,6 +31,7 @@ include 'chapter11'
 include 'chapter12'
 include 'chapter13'
 include 'chapter14'
+include 'chapter15'
 
 // Modules from later chapters of the book are added incrementally as their
 // directories are scaffolded. Add the corresponding `include` line here
