@@ -1,10 +1,14 @@
-package com.apress.prospring6.sixteen.entities;
+package com.apress.prospring6.sixteen.boot.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
@@ -14,7 +18,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Data
@@ -22,7 +28,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "SINGER")
-public class Singer {
+public class Singer implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -38,12 +44,27 @@ public class Singer {
     protected int version;
 
     @Column(name = "FIRST_NAME")
-    protected int firstName;
+    private String firstName;
 
     @Column(name = "LAST_NAME")
     private String lastName;
 
+    @Column(name = "PSEUDONYM")
+    private String pseudonym;
+
+    @Column(name = "GENRE")
+    private String genre;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "BIRTH_DATE")
     private LocalDate birthDate;
+
+    @OneToMany(mappedBy = "singer")
+    private Set<Award> awards;
+
+    @ManyToMany
+    @JoinTable(name = "SINGER_INSTRUMENT",
+    joinColumns = @JoinColumn(name = "SINGER_ID"),
+    inverseJoinColumns = @JoinColumn(name = "INSTRUMENT_ID"))
+    private Set<Instrument> instruments;
 }

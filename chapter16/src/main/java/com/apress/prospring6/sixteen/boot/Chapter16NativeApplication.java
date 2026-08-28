@@ -6,8 +6,8 @@ import org.springframework.boot.persistence.autoconfigure.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@EntityScan(basePackages = {"com.apress.prospring6.sixteen.entities"})
-@EnableJpaRepositories("com.apress.prospring6.sixteen.repos")
+@EntityScan(basePackages = {"com.apress.prospring6.sixteen.boot.entities"})
+@EnableJpaRepositories("com.apress.prospring6.sixteen.boot.entities")
 @EnableTransactionManagement
 @SpringBootApplication(scanBasePackages = "com.apress.prospring6.sixteen")
 public class Chapter16NativeApplication {
