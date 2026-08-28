@@ -1,0 +1,31 @@
+# web server configuration
+server:
+  port: 8083
+
+# application configuration
+spring:
+  # data source configuration - points at the MariaDB container started via
+  # `docker compose -f chapter06/docker-compose.yml up -d` (see that file for credentials).
+  datasource:
+    url: jdbc:mariadb://localhost:3306/prospring?useSSL=false
+    username: prospring
+    password: prospring
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      # the container starts with an empty schema - let Hibernate create/update the
+      # SINGER and ALBUM tables from the entity mappings on startup.
+      ddl-auto: update
+    properties:
+      hibernate:
+        show-sql: true
+        format-sql: false
+
+# logging config
+logging:
+  pattern:
+    console: "%-5level: %class{0} - %msg%n"
+  level:
+    root: INFO
+    com.apress.prospring6.sixteen: DEBUG

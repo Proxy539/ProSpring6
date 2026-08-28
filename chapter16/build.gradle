@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '4.1.0'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.graalvm.buildtools.native'
+}
+
+description 'Chapter 16: REST API with Spring Data JPA'
+
+group = 'com.apress.prospring6'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    runtimeOnly "org.mariadb.jdbc:mariadb-java-client:$mariadbClientVersion"
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+tasks.named("bootBuildImage") {
+    // With the org.graalvm.buildtools.native plugin applied, bootBuildImage
+    // automatically builds a native image using Paketo's default builder -
+    // no manual buildpacks/builder configuration needed.
+    imageName = "prospring6-gradle-native:1.0"
+}
+
+
+bootJar {
+    manifest {
+        attributes 'Start-Class': 'com.apress.prospring6.sixteen.boot.Chapter16NativeApplication'
+    }
+}
