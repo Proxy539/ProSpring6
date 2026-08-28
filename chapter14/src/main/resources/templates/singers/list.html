@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout :: pageTitle('List Singers Page')}"></head>
+
+    <body>
+        <div class="container">
+            <header th:replace="~{layout :: pageHeader}"></header>
+
+            <header th:replace="~{layout :: pageMenu}"></header>
+
+            <section>
+                <div class="card border-success mb-3" style="max-width: 40rem;"></div>
+                <div class="card-header" th:text="#{singers.list.title}"/>
+                <div class="card-body">
+                    <table th:if="${not #lists.isEmpty(singers)}" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th th:text="#{label.Singer.count}" class="table-sucess">COUNT</th>
+                                <th th:text="#{label.Singer.firstname}" class="table-sucess">FIRSTNAME</th>
+                                <th th:text="#{label.Singer.lastname}" class="table-success">LASTNAME</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="singer : ${singers}">
+                                <td> <a th:href="@{/singer/} + ${singer.id}" th:text="${singer.id}">ID</a>
+                                </td>
+                                <td th:text="${singer.firstName}">...</td>
+                                <td th:text="${singer.lastName}">...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <footer th:replace="~{layout :: pageFooter}"></footer>
+        </div>
+    </body>
+</html>

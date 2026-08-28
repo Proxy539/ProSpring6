@@ -13,17 +13,21 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation 'org.springframework:spring-webmvc'
-    implementation 'org.springframework.data:spring-data-jpa'
+    implementation('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-    implementation "org.thymeleaf:thymeleaf-spring6:$thymeleafVersion"
     implementation "org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE"
 
-    implementation "org.hibernate.orm:hibernate-core:$hibernateVersion"
     implementation "org.glassfish:jakarta.el:5.0.0-M1"
-    implementation "org.hibernate.validator:hibernate-validator:$hibernateValidatorVersion"
 
-    implementation "ch.qos.logback:logback-classic:$logbackVersion"
+    // no explicit version - the root build.gradle's $logbackVersion (1.4.8) predates
+    // Spring Boot 4.1's BOM-managed logback (1.5.34) and would override it, breaking
+    // Boot's logging bootstrap (see chapter13's build.gradle for the same note).
+    implementation "ch.qos.logback:logback-classic"
     implementation "jakarta.annotation:jakarta.annotation-api:$jakartaAnnotationVersion"
 
     implementation "com.zaxxer:HikariCP:$hikariVersion"
@@ -39,6 +43,20 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation "org.testcontainers:mariadb:$testcontainersVersion"
     testImplementation "org.testcontainers:junit-jupiter:$testcontainersVersion"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // Spring Boot 4.1 split TestRestTemplate/@AutoConfigureMockMvc out of spring-boot-starter-test into
+    // dedicated modules. Depend on those two directly rather than the 'spring-boot-starter-test-classic'
+    // umbrella, which also drags in spring-boot-security-test - its @AutoConfigureMockMvc auto-configuration
+    // imports reference spring-security classes that aren't on this module's classpath (we don't use
+    // Spring Security here), breaking context startup for any test using @AutoConfigureMockMvc.
+    testImplementation 'org.springframework.boot:spring-boot-resttestclient'
+    // TestRestTemplateTestAutoConfiguration's bean-type deduction needs RestTemplateBuilder on the
+    // classpath even though nothing here calls it directly.
+    testImplementation 'org.springframework.boot:spring-boot-restclient'
+    testImplementation 'org.springframework.boot:spring-boot-webmvc-test'
+    testRuntimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
+    testRuntimeOnly 'com.h2database:h2'
 }
 
 // Scaffolded only, like chapter06 before it - no src/ yet. Fill in the Spring MVC +

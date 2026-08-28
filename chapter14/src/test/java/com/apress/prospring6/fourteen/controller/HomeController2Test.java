@@ -1,25 +1,28 @@
 package com.apress.prospring6.fourteen.controller;
 
-import com.apress.prospring6.fourteen.WebConfig;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.testcontainers.shaded.org.hamcrest.Matchers;
 
+import com.apress.prospring6.fourteen.boot.Chapter14Application;
+
+import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-@SpringJUnitWebConfig(classes = WebConfig.class)
-public class HomeControllerTest {
+@ActiveProfiles("test")
+@AutoConfigureMockMvc
+@SpringBootTest(classes = Chapter14Application.class)
+public class HomeController2Test {
 
+    @Autowired
     MockMvc mockMvc;
-
-    public HomeControllerTest(MockMvc mockMvc) {
-        this.mockMvc = mockMvc;
-    }
 
     @Test
     void testHome() throws Exception {
@@ -27,6 +30,6 @@ public class HomeControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"))
-                .andExpect(content().string(Matchers.containsString("Spring MVC ThymeleafExample!!").toString()))
+                .andExpect(content().string(containsString("Spring Boot Thymeleaf Example!!")));
     }
 }
