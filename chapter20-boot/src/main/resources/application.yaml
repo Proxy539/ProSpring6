@@ -1,0 +1,5 @@
+spring:
+  r2dbc:
+    url: r2dbc:mariadb://localhost:3306/musicdb
+    username: prospring6
+    password: prospring6

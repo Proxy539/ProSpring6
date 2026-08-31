@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '4.1.0'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+description 'Chapter 20: Reactive Programming with WebFlux and R2DBC'
+
+group = 'com.apress.prospring6'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation "org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE"
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    implementation 'org.mariadb:r2dbc-mariadb:1.1.4'
+    implementation 'org.mariadb.jdbc:mariadb-java-client'
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // @DataR2dbcTest was split out of spring-boot-starter-test into its own module in Boot 4.1
+    // (see chapter14/chapter15's build.gradle for the same pattern with other test slices).
+    testImplementation 'org.springframework.boot:spring-boot-data-r2dbc-test'
+    testImplementation 'io.projectreactor:reactor-test'
+    testImplementation "org.testcontainers:mariadb:$testcontainersVersion"
+    testImplementation "org.testcontainers:junit-jupiter:$testcontainersVersion"
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+bootJar {
+    manifest {
+        attributes 'Start-Class': 'com.apress.prospring6.twenty.boot.Chapter20Application'
+    }
+}

@@ -7,6 +7,7 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.46/a5cfe99fdf320e84955ef653f2ce1bf789d11385/lombok-1.18.46.jar" />
         </processorPath>
+        <module name="pro-spring-6.chapter20-boot.main" />
         <module name="pro-spring-6.chapter13.main" />
         <module name="pro-spring-6.chapter13.test" />
         <module name="pro-spring-6.chapter16.main" />
@@ -87,6 +88,9 @@
       <module name="pro-spring-6.chapter19" options="-Xlint:serial -Xlint:cast -Xlint:classfile -Xlint:dep-ann -Xlint:divzero -Xlint:empty -Xlint:finally -Xlint:overrides -Xlint:path -Xlint:processing -Xlint:static -Xlint:try -Xlint:-options -Xlint:varargs -Xlint:fallthrough -Xlint:rawtypes -Xlint:deprecation -Xlint:unchecked" />
       <module name="pro-spring-6.chapter19.main" options="-Xlint:serial -Xlint:cast -Xlint:classfile -Xlint:dep-ann -Xlint:divzero -Xlint:empty -Xlint:finally -Xlint:overrides -Xlint:path -Xlint:processing -Xlint:static -Xlint:try -Xlint:-options -Xlint:varargs -Xlint:fallthrough -Xlint:rawtypes -Xlint:deprecation -Xlint:unchecked" />
       <module name="pro-spring-6.chapter19.test" options="-Xlint:serial -Xlint:cast -Xlint:classfile -Xlint:dep-ann -Xlint:divzero -Xlint:empty -Xlint:finally -Xlint:overrides -Xlint:path -Xlint:processing -Xlint:static -Xlint:try -Xlint:-options -Xlint:-varargs -Xlint:-fallthrough -Xlint:-rawtypes -Xlint:-deprecation -Xlint:-unchecked -parameters" />
+      <module name="pro-spring-6.chapter20-boot" options="-Xlint:serial -Xlint:cast -Xlint:classfile -Xlint:dep-ann -Xlint:divzero -Xlint:empty -Xlint:finally -Xlint:overrides -Xlint:path -Xlint:processing -Xlint:static -Xlint:try -Xlint:-options -Xlint:varargs -Xlint:fallthrough -Xlint:rawtypes -Xlint:deprecation -Xlint:unchecked -parameters" />
+      <module name="pro-spring-6.chapter20-boot.main" options="-Xlint:serial -Xlint:cast -Xlint:classfile -Xlint:dep-ann -Xlint:divzero -Xlint:empty -Xlint:finally -Xlint:overrides -Xlint:path -Xlint:processing -Xlint:static -Xlint:try -Xlint:-options -Xlint:varargs -Xlint:fallthrough -Xlint:rawtypes -Xlint:deprecation -Xlint:unchecked -parameters" />
+      <module name="pro-spring-6.chapter20-boot.test" options="-Xlint:serial -Xlint:cast -Xlint:classfile -Xlint:dep-ann -Xlint:divzero -Xlint:empty -Xlint:finally -Xlint:overrides -Xlint:path -Xlint:processing -Xlint:static -Xlint:try -Xlint:-options -Xlint:-varargs -Xlint:-fallthrough -Xlint:-rawtypes -Xlint:-deprecation -Xlint:-unchecked -parameters" />
       <module name="pro-spring-6.main" options="-Xlint:serial -Xlint:cast -Xlint:classfile -Xlint:dep-ann -Xlint:divzero -Xlint:empty -Xlint:finally -Xlint:overrides -Xlint:path -Xlint:processing -Xlint:static -Xlint:try -Xlint:-options -Xlint:varargs -Xlint:fallthrough -Xlint:rawtypes -Xlint:deprecation -Xlint:unchecked" />
       <module name="pro-spring-6.test" options="-Xlint:serial -Xlint:cast -Xlint:classfile -Xlint:dep-ann -Xlint:divzero -Xlint:empty -Xlint:finally -Xlint:overrides -Xlint:path -Xlint:processing -Xlint:static -Xlint:try -Xlint:-options -Xlint:-varargs -Xlint:-fallthrough -Xlint:-rawtypes -Xlint:-deprecation -Xlint:-unchecked -parameters" />
     </option>
