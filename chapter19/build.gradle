@@ -1,0 +1,41 @@
+plugins {
+    id 'war'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+description 'Chapter 19: Spring MVC WebSocket project'
+
+// we are using Spring Boot dependency management, but we configure Spring MVC in the classic manner - explicitly, with no Spring Boot "magic"
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.boot:spring-boot-dependencies:4.1.0'
+    }
+}
+
+dependencies {
+    implementation 'org.springframework:spring-webmvc'
+    implementation 'org.springframework:spring-websocket'
+    implementation 'org.springframework:spring-messaging'
+    implementation 'jakarta.websocket:jakarta.websocket-api:2.1.0'
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+    implementation "org.thymeleaf:thymeleaf-spring6:$thymeleafVersion"
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
+
+    compileOnly "jakarta.servlet:jakarta.servlet-api:$servletApiVersion"
+
+    // no explicit version - the root build.gradle's $logbackVersion (1.4.8) predates
+    // Spring Boot 4.1's BOM-managed logback (1.5.34) and would override it, breaking
+    // Boot's logging bootstrap (see chapter13's build.gradle for the same note).
+    implementation 'ch.qos.logback:logback-classic'
+    implementation "jakarta.annotation:jakarta.annotation-api:$jakartaAnnotationVersion"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
