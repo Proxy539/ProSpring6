@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout :: pageTitle('Error')}"></head>
+
+    <body>
+        <div class="container">
+            <header th:replace="~{layout :: pageHeader}"></header>
+
+            <section>
+                <div class="content">
+                    <p th:text="${problem}">Something went wrong.</p>
+                </div>
+            </section>
+
+            <footer th:replace="~{layout :: pageFooter}"></footer>
+        </div>
+    </body>
+</html>

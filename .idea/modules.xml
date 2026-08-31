@@ -18,6 +18,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/chapter14/pro-spring-6.chapter14.test.iml" filepath="$PROJECT_DIR$/.idea/modules/chapter14/pro-spring-6.chapter14.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/chapter16-kotlin/pro-spring-6.chapter16-kotlin.test.iml" filepath="$PROJECT_DIR$/.idea/modules/chapter16-kotlin/pro-spring-6.chapter16-kotlin.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/chapter16/pro-spring-6.chapter16.main.iml" filepath="$PROJECT_DIR$/.idea/modules/chapter16/pro-spring-6.chapter16.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chapter17/pro-spring-6.chapter17.test.iml" filepath="$PROJECT_DIR$/.idea/modules/chapter17/pro-spring-6.chapter17.test.iml" />
     </modules>
   </component>
 </project>

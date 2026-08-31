@@ -34,6 +34,7 @@ include 'chapter14'
 include 'chapter15'
 include 'chapter16'
 include 'chapter16-kotlin'
+include 'chapter17'
 
 // Modules from later chapters of the book are added incrementally as their
 // directories are scaffolded. Add the corresponding `include` line here

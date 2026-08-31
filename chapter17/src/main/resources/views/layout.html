@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+    <head th:fragment="pageTitle(title)"></head>
+
+    <body>
+        <header th:fragment="pageHeader" class="page-header">
+            <div class="row">
+                <div class="col-lg-8 col-md-7 col-sm-6">
+                    <div class="banner"></div>
+                    <div class="themeLocal">
+<!--                        theming links omitted-->
+                        <span sec:authorize="isAuthenticated()">
+                            Authenticated: <em sec:authentication="name"></em>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section th:fragment="pageMenu">
+            <div class="menu">
+                <ul>
+<!--                    other elements configuration omitted-->
+                    <li sec:authorize="isAuthenticated()">
+                        <a th:href="@{/exit}" th:text="#{command.logout}">Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section th:fragment="pageContent">
+            <div class="content">
+                <p>Page Content</p>
+            </div>
+        </section>
+
+        <footer th:fragment="pageFooter">
+            <div class="footer">
+                <p th:text="#{footer.text}"></p>
+            </div>
+        </footer>
+    </body>
+</html>

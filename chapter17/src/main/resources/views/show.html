@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout :: pageTitle('Singer Page')}"></head>
+
+    <body>
+        <div class="container">
+            <header th:replace="~{layout :: pageHeader}"></header>
+
+            <header th:replace="~{layout :: pageMenu}"></header>
+
+            <section>
+                <div class="container col-lg-12">
+                    <div class="card border-success mb-3" th:object="${singer}">
+                        <div class="card-header">Singer Details</div>
+                        <div class="card-body">
+                            <table class="table">
+                                <tbody>
+                                    <tr><th>First Name</th><td th:text="*{firstName}">...</td></tr>
+                                    <tr><th>Last Name</th><td th:text="*{lastName}">...</td></tr>
+                                    <tr><th>Genre</th><td th:text="*{genre}">...</td></tr>
+                                    <tr><th>Birth Date</th><td th:text="*{birthDate}">...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <form th:object="${singer}" th:action="@{/singer/} + ${singer.id}"
+                          th:method="delete" class="col p-3">
+                        <input sec:authorize="hasRole('admin')"
+                               type="submit" th:value="#{command.delete}"
+                               id="deleteButton"
+                               class="btn btn-danger"/>
+                    </form>
+                </div>
+            </section>
+
+            <footer th:replace="~{layout :: pageFooter}"></footer>
+        </div>
+    </body>
+</html>

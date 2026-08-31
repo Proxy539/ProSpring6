@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout :: pageTitle('Login Page')}"></head>
+
+    <body>
+        <div class="container">
+            <header th:replace="~{layout :: pageHeader}"></header>
+
+            <header th:replace="~{layout :: pageMenu}"></header>
+
+            <section>
+                <div class="content">
+                    <h5 th:text="#{command.login}">Log in</h5>
+                    <div class="container col-lg-12">
+                        <form th:action="@{/auth}" method="post">
+                            <div class="row mb-1">
+                                <input type="text" id="user" name="user"
+                                       autofocus="autofocus" class="form-control"
+                                       th:placeholder="#{label.username}"/>
+                            </div>
+                            <div class="row mb-1">
+                                <input type="password" id="pass" name="pass"
+                                       class="form-control" th:placeholder="#{label.password}"/>
+                            </div>
+                            <div class="form-group mb-1 align-items-end">
+                                <input type="submit" th:value="#{command.signin}"
+                                       id="loginButton" class="btn btn-dark"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <footer th:replace="~{layout :: pageFooter}"></footer>
+        </div>
+    </body>
+</html>
